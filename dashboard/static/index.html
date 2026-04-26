@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signal Processor Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>&#9650; Signal Processor</h1>
+      <div class="header-meta">
+        <span id="last-updated">Connecting...</span>
+        <span class="separator">|</span>
+        <span id="next-refresh"></span>
+        <span class="status-dot" id="status-dot"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Summary table -->
+    <section class="card">
+      <h2>Signal Summary</h2>
+      <div class="table-wrap">
+        <table id="summary-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Price</th>
+              <th>TradingView</th>
+              <th>TV Score</th>
+              <th>BarChart</th>
+              <th>BC Score</th>
+              <th>TrendSpotter</th>
+              <th>TS Strength</th>
+              <th>AI Signal</th>
+              <th>AI Conf.</th>
+              <th>AI Target</th>
+              <th>Consensus</th>
+              <th>Score</th>
+              <th>Swing</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody id="summary-body">
+            <tr><td colspan="15" class="loading">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Swing alerts -->
+    <section class="card" id="swing-section" style="display:none">
+      <h2>&#9888; Swing Alerts</h2>
+      <div id="swing-alerts"></div>
+    </section>
+
+    <!-- Per-ticker history (populated on row click) -->
+    <section class="card" id="detail-section" style="display:none">
+      <h2>History — <span id="detail-ticker"></span></h2>
+      <button class="close-btn" onclick="closeDetail()">&#10005; Close</button>
+      <div class="table-wrap">
+        <table id="history-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Consensus</th>
+              <th>Score</th>
+              <th>TV</th>
+              <th>BC</th>
+              <th>TS</th>
+              <th>AI</th>
+              <th>Price</th>
+              <th>Swing</th>
+            </tr>
+          </thead>
+          <tbody id="history-body">
+            <tr><td colspan="9" class="loading">Select a ticker row above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Service status -->
+    <section class="card status-card">
+      <h2>Service Status</h2>
+      <div id="status-grid" class="status-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Signal Processor &mdash; localhost dashboard</span>
+    <span id="footer-time"></span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
