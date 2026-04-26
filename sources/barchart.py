@@ -1,23 +1,17 @@
 """
 sources/barchart.py
 -------------------
-BarChart signal source adapter — web scraping implementation.
+BarChart signal source adapter.
 
-Scrapes the BarChart opinion page for:
-  - BC Opinion Signal (Signal #2)        → SourceSignal
-  - BarChart TrendSpotter (Signal #3)    → TrendSpotterSignal
+Data acquisition strategy (tried in order):
+  1. BarChart's internal JSON API  (/proxies/core-api/v1/quotes/get)
+     — most reliable; requires a live session cookie (XSRF-TOKEN).
+  2. Embedded JSON in the opinion page HTML (__NEXT_DATA__ / script tags).
+  3. HTML table parsing fallback.
 
-When BARCHART_ACCESS_MODE = "api", swap _scrape_opinion() and
-_scrape_trendspotter() for API equivalents. The public fetch() and
-fetch_trendspotter() interfaces stay identical — no other file changes.
-
-Note on scraping:
-  BarChart's opinion page is JavaScript-rendered. We request the page
-  with a browser-like User-Agent and parse the embedded JSON data
-  that BarChart injects into the page as a <script> tag. This is more
-  reliable than parsing rendered HTML but may break if BarChart changes
-  their page structure. If scraping fails, the adapter returns None
-  gracefully and logs a warning.
+A single requests.Session is shared across all tickers so the XSRF cookie
+is established once and reused. The session is refreshed automatically when
+the API returns a 401/403.
 """
 
 from __future__ import annotations
@@ -69,8 +63,42 @@ _HEADERS = {
     "Referer":         "https://www.barchart.com",
 }
 
+# Fields requested from BarChart's internal API
+_API_FIELDS = ",".join([
+    "opinion_short", "opinion_medium", "opinion_long", "opinion_overall",
+    "signal_strength", "signal_direction",
+    "trendspotter", "trendspotter_strength", "trendspotter_change",
+    "trendspotter_date", "days_in_signal",
+    "ma20", "ma50", "ma100", "ma200",
+    "ema20", "ema50", "ema100", "ema200",
+    "rsi14", "stochasticK", "stochasticD", "williamsPercentR",
+    "cci", "momentum", "macd", "macdSignal", "macdHistogram",
+    "adx", "adxPlusDI", "adxMinusDI",
+    "lastPrice", "open", "high", "low", "volume", "avgVolume",
+    "fiftyTwoWeekHigh", "fiftyTwoWeekLow", "percentChange",
+])
+
+# Normalise any camelCase API keys → bc_field names used in the indicator registry
+_API_KEY_MAP = {
+    "signalStrength":       "signal_strength",
+    "signalDirection":      "signal_direction",
+    "trendSpotter":         "trendspotter",
+    "trendspotterStrength": "trendspotter_strength",
+    "trendSpotterStrength": "trendspotter_strength",
+    "trendspotterChange":   "trendspotter_change",
+    "trendSpotterChange":   "trendspotter_change",
+    "trendspotterDate":     "trendspotter_date",
+    "trendSpotterDate":     "trendspotter_date",
+    "daysInSignal":         "days_in_signal",
+}
+
 
 class BarChartSource(SignalSource, TrendSpotterSource):
+
+    def __init__(self) -> None:
+        self._session = requests.Session()
+        self._session.headers.update(_HEADERS)
+        self._session_initialised = False
 
     @property
     def name(self) -> str:
@@ -82,90 +110,197 @@ class BarChartSource(SignalSource, TrendSpotterSource):
 
     def fetch(self, ticker: str, exchange: str) -> Optional[SourceSignal]:
         """Fetch BarChart Opinion and indicators → SourceSignal."""
-        data = self._scrape_opinion(ticker)
+        data = self._get_opinion_data(ticker)
         if data is None:
             return None
         return self._build_source_signal(ticker, data)
 
     def fetch_trendspotter(self, ticker: str) -> Optional[TrendSpotterSignal]:
-        """Fetch BarChart TrendSpotter signal."""
-        data = self._scrape_opinion(ticker)
+        """Fetch BarChart TrendSpotter signal (reuses cached opinion data)."""
+        data = self._get_opinion_data(ticker)
         if data is None:
             return None
         return self._build_trendspotter_signal(ticker, data)
 
     # ------------------------------------------------------------------
-    # Scraping
+    # Session management
     # ------------------------------------------------------------------
 
-    def _scrape_opinion(self, ticker: str) -> Optional[dict]:
+    def _ensure_session(self) -> None:
+        """Hit the BarChart homepage once to acquire the XSRF-TOKEN cookie."""
+        if self._session_initialised:
+            return
+        try:
+            self._session.get(BARCHART_BASE_URL, timeout=15)
+            time.sleep(1)  # let BarChart's bot-detection settle before API calls
+            self._session_initialised = True
+            log.debug("BC: session established (XSRF=%s…)",
+                      self._session.cookies.get("XSRF-TOKEN", "")[:8])
+        except Exception as exc:
+            log.warning("BC: could not establish session: %s", exc)
+
+    def _reset_session(self) -> None:
+        self._session = requests.Session()
+        self._session.headers.update(_HEADERS)
+        self._session_initialised = False
+        self._ensure_session()
+
+    # ------------------------------------------------------------------
+    # Data acquisition (API → HTML fallback)
+    # ------------------------------------------------------------------
+
+    def _get_opinion_data(self, ticker: str) -> Optional[dict]:
         """
-        Scrape the BarChart opinion page and extract embedded JSON data.
-        Returns a flat dict of field_name → value, or None on failure.
+        Fetch opinion data for one ticker. Tries in order:
+          1. BarChart internal JSON API (most reliable)
+          2. Embedded JSON in the opinion page HTML
+          3. HTML table parsing
         """
-        url = BARCHART_BASE_URL + BARCHART_OPINION_PATH.format(symbol=ticker)
+        self._ensure_session()
 
         for attempt in range(1, BC_RETRY_ATTEMPTS + 1):
-            try:
-                resp = requests.get(url, headers=_HEADERS, timeout=20)
-                resp.raise_for_status()
-                data = self._parse_opinion_page(resp.text, ticker)
-                if data:
-                    return data
-                log.warning("BC: no parseable data for %s on attempt %d", ticker, attempt)
-            except requests.RequestException as exc:
-                log.warning(
-                    "BC scrape %s attempt %d/%d: %s",
-                    ticker, attempt, BC_RETRY_ATTEMPTS, exc,
-                )
+            # -- Strategy 1: internal API --
+            data = self._fetch_via_api(ticker)
+            if data:
+                return data
+
+            # -- Strategy 2 & 3: page scrape --
+            data = self._scrape_opinion_page(ticker)
+            if data:
+                return data
+
+            log.warning("BC: no parseable data for %s on attempt %d", ticker, attempt)
             if attempt < BC_RETRY_ATTEMPTS:
                 time.sleep(BC_RETRY_DELAY_SEC)
 
-        log.error("BC: all scrape attempts failed for %s", ticker)
+        log.error("BC: all attempts failed for %s", ticker)
         return None
 
-    def _parse_opinion_page(self, html: str, ticker: str) -> Optional[dict]:
+    def _fetch_via_api(self, ticker: str) -> Optional[dict]:
         """
-        Extract opinion data from BarChart page HTML.
-
-        BarChart embeds data in multiple places:
-          1. A JSON blob in a <script> tag with window.bcApp or similar
-          2. Structured HTML tables in the opinion section
-
-        We try JSON extraction first (more reliable), fall back to HTML parsing.
+        Call BarChart's internal quote API.
+        Requires a valid XSRF-TOKEN cookie from the homepage visit.
         """
-        data = self._extract_json_data(html, ticker)
+        xsrf = self._session.cookies.get("XSRF-TOKEN", "")
+        url  = (
+            f"{BARCHART_BASE_URL}/proxies/core-api/v1/quotes/get"
+            f"?symbols={ticker}&fields={_API_FIELDS}&raw=1"
+        )
+        headers = {
+            "Accept":       "application/json",
+            "X-XSRF-TOKEN": xsrf,
+            "Referer":      f"{BARCHART_BASE_URL}/stocks/quotes/{ticker}/opinion",
+        }
+        try:
+            resp = self._session.get(url, headers=headers, timeout=15)
+
+            if resp.status_code in (401, 403):
+                log.debug("BC API auth failed for %s — resetting session", ticker)
+                self._reset_session()
+                return None
+
+            if not resp.ok:
+                log.debug("BC API %s status=%d", ticker, resp.status_code)
+                return None
+
+            body = resp.json()
+            rows = body.get("data", [])
+            if not rows:
+                return None
+
+            row = rows[0]
+            # API may nest raw values under a "raw" key
+            raw_data = row.get("raw") if isinstance(row.get("raw"), dict) else row
+            return self._normalise_api_row(raw_data)
+
+        except Exception as exc:
+            log.debug("BC API exception for %s: %s", ticker, exc)
+            return None
+
+    def _normalise_api_row(self, row: dict) -> dict:
+        """Remap any camelCase API keys to the bc_field names the registry expects."""
+        result = dict(row)
+        for api_key, bc_field in _API_KEY_MAP.items():
+            if api_key in row and bc_field not in result:
+                result[bc_field] = row[api_key]
+        return result
+
+    def _scrape_opinion_page(self, ticker: str) -> Optional[dict]:
+        """Fetch the HTML opinion page and extract data via JSON or table parsing."""
+        url = BARCHART_BASE_URL + BARCHART_OPINION_PATH.format(symbol=ticker)
+        try:
+            resp = self._session.get(url, timeout=20)
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            log.warning("BC page fetch %s: %s", ticker, exc)
+            return None
+
+        data = self._extract_json_from_page(resp.text, ticker)
         if not data:
-            data = self._extract_html_data(html, ticker)
+            data = self._extract_html_data(resp.text, ticker)
         return data
 
-    def _extract_json_data(self, html: str, ticker: str) -> Optional[dict]:
-        """Try to find and parse embedded JSON data blobs."""
+    def _extract_json_from_page(self, html: str, ticker: str) -> Optional[dict]:
+        """Try several embedded-JSON patterns in the page source."""
+        soup = BeautifulSoup(html, "lxml")
+
+        # Next.js / React SSR: data embedded in <script id="__NEXT_DATA__">
+        next_tag = soup.find("script", {"id": "__NEXT_DATA__"})
+        if next_tag and next_tag.string:
+            try:
+                raw = json.loads(next_tag.string)
+                data = self._normalise_next_data(raw)
+                if data:
+                    return data
+            except json.JSONDecodeError:
+                pass
+
+        # Legacy patterns: window.__PRELOADED_STATE__ or window.pageData
         patterns = [
-            r'window\.__PRELOADED_STATE__\s*=\s*({.+?});\s*</script>',
-            r'"technicalSummary"\s*:\s*({[^}]+})',
-            r'"opinion"\s*:\s*({[^}]+})',
+            r'window\.__PRELOADED_STATE__\s*=\s*(\{.+?\})\s*;',
+            r'window\.pageData\s*=\s*(\{.+?\})\s*;',
+            r'var\s+pageData\s*=\s*(\{.+?\})\s*;',
         ]
         for pattern in patterns:
             match = re.search(pattern, html, re.DOTALL)
             if match:
                 try:
                     raw = json.loads(match.group(1))
-                    extracted = self._normalise_json_blob(raw)
-                    if extracted:
-                        return extracted
-                except (json.JSONDecodeError, KeyError):
+                    data = self._normalise_json_blob(raw)
+                    if data:
+                        return data
+                except json.JSONDecodeError:
                     continue
+
+        return None
+
+    def _normalise_next_data(self, blob: dict) -> Optional[dict]:
+        """Navigate Next.js __NEXT_DATA__ structure to find opinion fields."""
+        # Walk common paths: props → pageProps → ... → quote / technicals
+        def _dig(d: dict, *keys):
+            for k in keys:
+                if not isinstance(d, dict):
+                    return None
+                d = d.get(k, {})
+            return d if isinstance(d, dict) else None
+
+        candidates = [
+            _dig(blob, "props", "pageProps", "quote"),
+            _dig(blob, "props", "pageProps", "technicals"),
+            _dig(blob, "props", "pageProps", "pageData"),
+            _dig(blob, "props", "initialState", "quote"),
+        ]
+        for candidate in candidates:
+            if candidate:
+                data = self._normalise_json_blob(candidate)
+                if data:
+                    return data
         return None
 
     def _normalise_json_blob(self, blob: dict) -> Optional[dict]:
-        """
-        Flatten a raw JSON blob into canonical bc_field → value mapping.
-        Handles nested structures from different BarChart JSON layouts.
-        """
+        """Flatten a raw JSON blob into canonical bc_field → value mapping."""
         result = {}
 
-        # Try common paths for opinion data
         opinion = (
             blob.get("opinion")
             or blob.get("technicalSummary")
@@ -174,54 +309,60 @@ class BarChartSource(SignalSource, TrendSpotterSource):
         )
 
         field_map = {
-            "strongBuy":     "opinion_short",
-            "shortTermSignal": "opinion_short",
-            "mediumTermSignal": "opinion_medium",
-            "longTermSignal":  "opinion_long",
-            "overallSignal":   "opinion_overall",
-            "signalStrength":  "signal_strength",
-            "signalDirection": "signal_direction",
-            "trendSpotter":    "trendspotter",
+            "shortTermSignal":      "opinion_short",
+            "mediumTermSignal":     "opinion_medium",
+            "longTermSignal":       "opinion_long",
+            "overallSignal":        "opinion_overall",
+            "signalStrength":       "signal_strength",
+            "signalDirection":      "signal_direction",
+            "trendSpotter":         "trendspotter",
             "trendSpotterStrength": "trendspotter_strength",
             "trendSpotterChange":   "trendspotter_change",
         }
-
         for json_key, bc_field in field_map.items():
             val = opinion.get(json_key)
             if val is not None:
                 result[bc_field] = val
 
-        # Price data
+        # Also accept flat keys that already match bc_field names
+        flat_keys = [
+            "opinion_short", "opinion_medium", "opinion_long", "opinion_overall",
+            "signal_strength", "signal_direction", "trendspotter",
+            "trendspotter_strength", "trendspotter_change", "trendspotter_date",
+            "days_in_signal",
+            "ma20", "ma50", "ma100", "ma200", "ema20", "ema50", "ema100", "ema200",
+            "rsi14", "stochasticK", "stochasticD", "williamsPercentR", "cci",
+            "momentum", "macd", "macdSignal", "macdHistogram",
+            "adx", "adxPlusDI", "adxMinusDI",
+            "lastPrice", "open", "high", "low", "volume", "avgVolume",
+            "fiftyTwoWeekHigh", "fiftyTwoWeekLow", "percentChange",
+        ]
+        for key in flat_keys:
+            if key not in result and key in blob:
+                result[key] = blob[key]
+
         quote = blob.get("quote") or blob.get("price") or {}
         price_map = {
-            "lastPrice": "lastPrice",
-            "close":     "lastPrice",
-            "open":      "open",
-            "high":      "high",
-            "low":       "low",
-            "volume":    "volume",
-            "avgVolume": "avgVolume",
+            "lastPrice": "lastPrice", "close": "lastPrice",
+            "open": "open", "high": "high", "low": "low",
+            "volume": "volume", "avgVolume": "avgVolume",
             "fiftyTwoWeekHigh": "fiftyTwoWeekHigh",
             "fiftyTwoWeekLow":  "fiftyTwoWeekLow",
             "percentChange":    "percentChange",
         }
         for json_key, bc_field in price_map.items():
             val = quote.get(json_key)
-            if val is not None:
+            if val is not None and bc_field not in result:
                 result[bc_field] = val
 
         return result if result else None
 
     def _extract_html_data(self, html: str, ticker: str) -> Optional[dict]:
-        """
-        Fallback: parse structured HTML tables from the opinion page.
-        Less reliable than JSON extraction but works when JSON is absent.
-        """
+        """Last-resort: parse opinion values from rendered HTML tables."""
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup   = BeautifulSoup(html, "lxml")
             result = {}
 
-            # Opinion signal rows — look for the opinion summary section
             opinion_map = {
                 "Short-Term":  "opinion_short",
                 "Medium-Term": "opinion_medium",
@@ -236,17 +377,17 @@ class BarChartSource(SignalSource, TrendSpotterSource):
                     if label in opinion_map:
                         result[opinion_map[label]] = value
 
-            # TrendSpotter — typically in a dedicated section
-            ts_section = soup.find("div", {"data-ng-controller": "TrendSpotterController"}) \
-                      or soup.find(class_=re.compile(r"trendspotter", re.I))
+            ts_section = (
+                soup.find("div", {"data-ng-controller": "TrendSpotterController"})
+                or soup.find(class_=re.compile(r"trendspotter", re.I))
+            )
             if ts_section:
                 ts_text = ts_section.get_text(separator=" ", strip=True)
-                for keyword in ["Buy", "Sell", "Hold"]:
+                for keyword in ("Buy", "Sell", "Hold"):
                     if keyword in ts_text:
                         result["trendspotter"] = keyword
                         break
 
-            # Last price — look for common price display patterns
             price_tag = soup.find(class_=re.compile(r"last-price|lastPrice|quote-price", re.I))
             if price_tag:
                 price_str = re.sub(r"[^\d.]", "", price_tag.get_text())

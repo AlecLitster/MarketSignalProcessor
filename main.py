@@ -30,6 +30,7 @@ from config.settings import (
     POLLING_INTERVAL_SECONDS,
     TRADINGVIEW_ENABLED,
     BARCHART_ENABLED,
+    YFINANCE_ENABLED,
     CLAUDE_AI_SYNOPSIS_ENABLED,
     AI_HISTORY_CYCLES,
     TRADING_ENABLED,
@@ -62,6 +63,7 @@ log = logging.getLogger("main")
 
 _tv_source  = None
 _bc_source  = None
+_yf_source  = None
 _ai         = None
 
 if TRADINGVIEW_ENABLED:
@@ -71,6 +73,10 @@ if TRADINGVIEW_ENABLED:
 if BARCHART_ENABLED:
     from sources.barchart import BarChartSource
     _bc_source = BarChartSource()
+
+if YFINANCE_ENABLED:
+    from sources.yfinance_source import YFinanceSource
+    _yf_source = YFinanceSource()
 
 if CLAUDE_AI_SYNOPSIS_ENABLED:
     from ai.claude import ClaudeInterpreter
@@ -92,6 +98,9 @@ def _fetch_one(ticker: dict) -> CycleResult:
     if _bc_source:
         result.barchart     = _bc_source.fetch(symbol, exchange)
         result.trendspotter = _bc_source.fetch_trendspotter(symbol)
+
+    if _yf_source:
+        result.yfinance = _yf_source.fetch(symbol, exchange)
 
     return result
 
@@ -127,13 +136,14 @@ def run_cycle() -> None:
         _maybe_add_ai(result, history[-AI_HISTORY_CYCLES:])
 
         log.info(
-            "%-8s  %s  score=%+.4f  TV=%-5s  BC=%-5s  TS=%-5s  AI=%-5s  swing=%s",
+            "%-8s  %s  score=%+.4f  TV=%-5s  BC=%-5s  TS=%-5s  YF=%-5s  AI=%-5s  swing=%s",
             result.ticker,
             result.consensus_signal,
             result.consensus_score,
             getattr(result.tradingview,  "signal", "N/A"),
             getattr(result.barchart,     "signal", "N/A"),
             getattr(result.trendspotter, "signal", "N/A"),
+            getattr(result.yfinance,     "signal", "N/A"),
             getattr(result.ai,           "signal", "—"),
             result.swing_event.label if result.swing_event else "—",
         )

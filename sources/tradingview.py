@@ -99,6 +99,12 @@ class TradingViewSource(SignalSource):
                 )
                 if attempt < TV_RETRY_ATTEMPTS:
                     time.sleep(TV_RETRY_DELAY_SEC)
+
+        log.error(
+            "TV: all retries failed for %s %s — verify symbol and exchange are "
+            "correct (screener=%s, exchange=%s)",
+            ticker, label, TRADINGVIEW_SCREENER, exchange,
+        )
         return None
 
     # ------------------------------------------------------------------
