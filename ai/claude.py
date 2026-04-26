@@ -257,7 +257,13 @@ class ClaudeInterpreter(AIInterpreter):
                     log.warning("Claude rate-limited. Waiting %ds (attempt %d/%d)", wait, attempt, CLAUDE_MAX_RETRIES)
                     time.sleep(wait)
                 else:
-                    log.error("Claude API HTTP error: %s", exc)
+                    body = ""
+                    if exc.response is not None:
+                        try:
+                            body = exc.response.json()
+                        except Exception:
+                            body = exc.response.text[:500]
+                    log.error("Claude API HTTP error: %s — response: %s", exc, body)
                     return None
             except Exception as exc:
                 log.error("Claude API error attempt %d/%d: %s", attempt, CLAUDE_MAX_RETRIES, exc)
