@@ -1,775 +1,11 @@
 [
   {
     "ticker": "GLD",
-    "timestamp": "2026-04-26T09:23:27.374028",
+    "timestamp": "2026-04-26T17:54:31.018585",
     "tradingview": {
       "source": "tradingview",
       "ticker": "GLD",
-      "timestamp": "2026-04-26T09:23:29.203911",
-      "signal": "HOLD",
-      "score": 0.0,
-      "price": 433.25,
-      "timeframe_signals": {
-        "daily": "Neutral",
-        "weekly": "Neutral"
-      },
-      "indicators": {
-        "moving_averages": [
-          {
-            "key": "TV_SMA5",
-            "value": 434.242,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA10",
-            "value": 437.813,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA20",
-            "value": 433.698,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA30",
-            "value": 432.137667,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_SMA50",
-            "value": 447.3286,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA100",
-            "value": 434.5378,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA200",
-            "value": 388.6425,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_EMA5",
-            "value": 434.36448,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA10",
-            "value": 435.35198,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA20",
-            "value": 436.001369,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA30",
-            "value": 437.621176,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA50",
-            "value": 438.452341,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA100",
-            "value": 427.376236,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_EMA200",
-            "value": 395.490037,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_VWMA",
-            "value": 432.185153,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_HULL9",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_ICHI_B",
-            "value": 423.95,
-            "signal": "BUY"
-          }
-        ],
-        "oscillators": [
-          {
-            "key": "TV_RSI",
-            "value": 47.4694,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_STOCH_K",
-            "value": 40.614864,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_STOCH_D",
-            "value": 43.726516,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_CCI20",
-            "value": -4.720993,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_AO",
-            "value": -2.00301,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_MOMENTUM",
-            "value": -3.88,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_WILLIAMS",
-            "value": -60.351563,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_BBP",
-            "value": -4.870834,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_UO",
-            "value": 45.10641,
-            "signal": "NEUTRAL"
-          }
-        ],
-        "trend": [
-          {
-            "key": "TV_MACD_LINE",
-            "value": -1.59897,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_MACD_SIGNAL",
-            "value": -2.182086,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_MACD_CROSS",
-            "value": -1.59897,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_ADX",
-            "value": 17.889572,
-            "signal": "WEAK_TREND"
-          },
-          {
-            "key": "TV_ADX_PLUS",
-            "value": 21.905285,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_ADX_MINUS",
-            "value": 35.949889,
-            "signal": "N/A"
-          }
-        ],
-        "volume": [
-          {
-            "key": "TV_VOLUME",
-            "value": 5924116.0,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_VWMA_V",
-            "value": 432.185153,
-            "signal": "N/A"
-          }
-        ],
-        "pivots": [
-          {
-            "key": "PIVOT_CLASSIC_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S1",
-            "value": 388.9433,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S2",
-            "value": 347.5967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S3",
-            "value": 254.6467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R1",
-            "value": 481.8933,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R2",
-            "value": 533.4967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R3",
-            "value": 626.4467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S1",
-            "value": 405.0398,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S2",
-            "value": 383.1036,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S3",
-            "value": 347.5967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R1",
-            "value": 476.0536,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R2",
-            "value": 497.9898,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R3",
-            "value": 533.4967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S1",
-            "value": 421.7696,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S2",
-            "value": 413.2492,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S3",
-            "value": 404.7288,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R1",
-            "value": 438.8104,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R2",
-            "value": 447.3308,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R3",
-            "value": 455.8512,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_PP",
-            "value": 440.3375,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S1",
-            "value": 388.525,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S2",
-            "value": 347.3875,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S3",
-            "value": 295.575,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R1",
-            "value": 481.475,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R2",
-            "value": 533.2875,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R3",
-            "value": 574.425,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_PP",
-            "value": 430.21,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S1",
-            "value": 368.27,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S2",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S3",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R1",
-            "value": 461.22,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R2",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R3",
-            "value": null,
-            "signal": "N/A"
-          }
-        ]
-      },
-      "buy_count": 8,
-      "sell_count": 8,
-      "neutral_count": 10
-    },
-    "barchart": null,
-    "trendspotter": null,
-    "ai": null,
-    "consensus_signal": "HOLD",
-    "consensus_score": 0.0,
-    "swing_event": null
-  },
-  {
-    "ticker": "GLD",
-    "timestamp": "2026-04-26T09:31:36.258047",
-    "tradingview": {
-      "source": "tradingview",
-      "ticker": "GLD",
-      "timestamp": "2026-04-26T09:31:38.135905",
-      "signal": "HOLD",
-      "score": 0.0,
-      "price": 433.25,
-      "timeframe_signals": {
-        "daily": "Neutral",
-        "weekly": "Neutral"
-      },
-      "indicators": {
-        "moving_averages": [
-          {
-            "key": "TV_SMA5",
-            "value": 434.242,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA10",
-            "value": 437.813,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA20",
-            "value": 433.698,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA30",
-            "value": 432.137667,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_SMA50",
-            "value": 447.3286,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA100",
-            "value": 434.5378,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_SMA200",
-            "value": 388.6425,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_EMA5",
-            "value": 434.36448,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA10",
-            "value": 435.35198,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA20",
-            "value": 436.001369,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA30",
-            "value": 437.621176,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA50",
-            "value": 438.452341,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_EMA100",
-            "value": 427.376236,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_EMA200",
-            "value": 395.490037,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_VWMA",
-            "value": 432.185153,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_HULL9",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_ICHI_B",
-            "value": 423.95,
-            "signal": "BUY"
-          }
-        ],
-        "oscillators": [
-          {
-            "key": "TV_RSI",
-            "value": 47.4694,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_STOCH_K",
-            "value": 40.614864,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_STOCH_D",
-            "value": 43.726516,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_CCI20",
-            "value": -4.720993,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_AO",
-            "value": -2.00301,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_MOMENTUM",
-            "value": -3.88,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_WILLIAMS",
-            "value": -60.351563,
-            "signal": "NEUTRAL"
-          },
-          {
-            "key": "TV_BBP",
-            "value": -4.870834,
-            "signal": "SELL"
-          },
-          {
-            "key": "TV_UO",
-            "value": 45.10641,
-            "signal": "NEUTRAL"
-          }
-        ],
-        "trend": [
-          {
-            "key": "TV_MACD_LINE",
-            "value": -1.59897,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_MACD_SIGNAL",
-            "value": -2.182086,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_MACD_CROSS",
-            "value": -1.59897,
-            "signal": "BUY"
-          },
-          {
-            "key": "TV_ADX",
-            "value": 17.889572,
-            "signal": "WEAK_TREND"
-          },
-          {
-            "key": "TV_ADX_PLUS",
-            "value": 21.905285,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_ADX_MINUS",
-            "value": 35.949889,
-            "signal": "N/A"
-          }
-        ],
-        "volume": [
-          {
-            "key": "TV_VOLUME",
-            "value": 5924116.0,
-            "signal": "N/A"
-          },
-          {
-            "key": "TV_VWMA_V",
-            "value": 432.185153,
-            "signal": "N/A"
-          }
-        ],
-        "pivots": [
-          {
-            "key": "PIVOT_CLASSIC_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S1",
-            "value": 388.9433,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S2",
-            "value": 347.5967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_S3",
-            "value": 254.6467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R1",
-            "value": 481.8933,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R2",
-            "value": 533.4967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CLASSIC_R3",
-            "value": 626.4467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S1",
-            "value": 405.0398,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S2",
-            "value": 383.1036,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_S3",
-            "value": 347.5967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R1",
-            "value": 476.0536,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R2",
-            "value": 497.9898,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_FIBONACCI_R3",
-            "value": 533.4967,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_PP",
-            "value": 440.5467,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S1",
-            "value": 421.7696,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S2",
-            "value": 413.2492,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_S3",
-            "value": 404.7288,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R1",
-            "value": 438.8104,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R2",
-            "value": 447.3308,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_CAMARILLA_R3",
-            "value": 455.8512,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_PP",
-            "value": 440.3375,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S1",
-            "value": 388.525,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S2",
-            "value": 347.3875,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_S3",
-            "value": 295.575,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R1",
-            "value": 481.475,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R2",
-            "value": 533.2875,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_WOODIE_R3",
-            "value": 574.425,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_PP",
-            "value": 430.21,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S1",
-            "value": 368.27,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S2",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_S3",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R1",
-            "value": 461.22,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R2",
-            "value": null,
-            "signal": "N/A"
-          },
-          {
-            "key": "PIVOT_DEMARK_R3",
-            "value": null,
-            "signal": "N/A"
-          }
-        ]
-      },
-      "buy_count": 8,
-      "sell_count": 8,
-      "neutral_count": 10
-    },
-    "barchart": null,
-    "trendspotter": null,
-    "ai": null,
-    "consensus_signal": "HOLD",
-    "consensus_score": 0.0,
-    "swing_event": null
-  },
-  {
-    "ticker": "GLD",
-    "timestamp": "2026-04-26T10:05:51.327961",
-    "tradingview": {
-      "source": "tradingview",
-      "ticker": "GLD",
-      "timestamp": "2026-04-26T10:05:53.210719",
+      "timestamp": "2026-04-26T17:54:32.918332",
       "signal": "HOLD",
       "score": 0.0,
       "price": 433.25,
@@ -1143,99 +379,7 @@
     "yfinance": {
       "source": "yfinance",
       "ticker": "GLD",
-      "timestamp": "2026-04-26T10:05:53.285361",
-      "signal": "HOLD",
-      "score": -0.087,
-      "price": 433.25,
-      "timeframe_signals": {
-        "short": "Sell",
-        "medium": "Sell",
-        "long": "Buy"
-      },
-      "indicators": {
-        "moving_averages": [
-          {
-            "key": "SMA_20",
-            "value": 433.698,
-            "signal": "SELL"
-          },
-          {
-            "key": "SMA_50",
-            "value": 447.3286,
-            "signal": "SELL"
-          },
-          {
-            "key": "SMA_200",
-            "value": 388.6425,
-            "signal": "BUY"
-          },
-          {
-            "key": "EMA_9",
-            "value": 435.306486,
-            "signal": "SELL"
-          },
-          {
-            "key": "EMA_21",
-            "value": 436.150812,
-            "signal": "SELL"
-          }
-        ],
-        "oscillators": [
-          {
-            "key": "RSI_14",
-            "value": 47.469401,
-            "signal": "HOLD"
-          },
-          {
-            "key": "MACD",
-            "value": -1.598969,
-            "signal": "BUY"
-          },
-          {
-            "key": "STOCH",
-            "value": 40.61485,
-            "signal": "HOLD"
-          }
-        ],
-        "trend": [
-          {
-            "key": "ADX_14",
-            "value": 17.886506,
-            "signal": "HOLD"
-          },
-          {
-            "key": "BBANDS",
-            "value": null,
-            "signal": "N/A"
-          }
-        ],
-        "volume": [
-          {
-            "key": "OBV",
-            "value": 454863000.0,
-            "signal": "SELL"
-          }
-        ]
-      },
-      "buy_count": 2,
-      "sell_count": 5,
-      "neutral_count": 4
-    },
-    "ai": null,
-    "consensus_signal": "HOLD",
-    "consensus_score": -0.0316,
-    "swing_event": null
-  },
-  {
-    "ticker": "GLD",
-    "timestamp": "2026-04-26T10:09:17.628749",
-    "tradingview": null,
-    "barchart": null,
-    "trendspotter": null,
-    "yfinance": {
-      "source": "yfinance",
-      "ticker": "GLD",
-      "timestamp": "2026-04-26T10:09:25.164648",
+      "timestamp": "2026-04-26T17:54:32.990643",
       "signal": "HOLD",
       "score": -0.08,
       "price": 433.25,
@@ -1315,7 +459,940 @@
     },
     "ai": null,
     "consensus_signal": "HOLD",
-    "consensus_score": -0.08,
+    "consensus_score": -0.0291,
+    "swing_event": null
+  },
+  {
+    "ticker": "GLD",
+    "timestamp": "2026-04-26T20:31:13.145875",
+    "tradingview": {
+      "source": "tradingview",
+      "ticker": "GLD",
+      "timestamp": "2026-04-26T20:31:15.020736",
+      "signal": "HOLD",
+      "score": 0.0,
+      "price": 433.25,
+      "timeframe_signals": {
+        "daily": "Neutral",
+        "weekly": "Neutral"
+      },
+      "indicators": {
+        "moving_averages": [
+          {
+            "key": "TV_SMA5",
+            "value": 434.242,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA10",
+            "value": 437.813,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA20",
+            "value": 433.698,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA30",
+            "value": 432.137667,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_SMA50",
+            "value": 447.3286,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA100",
+            "value": 434.5378,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA200",
+            "value": 388.6425,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_EMA5",
+            "value": 434.36448,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA10",
+            "value": 435.35198,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA20",
+            "value": 436.001369,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA30",
+            "value": 437.621176,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA50",
+            "value": 438.452341,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA100",
+            "value": 427.376236,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_EMA200",
+            "value": 395.490037,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_VWMA",
+            "value": 432.185153,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_HULL9",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_ICHI_B",
+            "value": 423.95,
+            "signal": "BUY"
+          }
+        ],
+        "oscillators": [
+          {
+            "key": "TV_RSI",
+            "value": 47.4694,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_STOCH_K",
+            "value": 40.614864,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_STOCH_D",
+            "value": 43.726516,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_CCI20",
+            "value": -4.720993,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_AO",
+            "value": -2.00301,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_MOMENTUM",
+            "value": -3.88,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_WILLIAMS",
+            "value": -60.351563,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_BBP",
+            "value": -4.870834,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_UO",
+            "value": 45.10641,
+            "signal": "NEUTRAL"
+          }
+        ],
+        "trend": [
+          {
+            "key": "TV_MACD_LINE",
+            "value": -1.59897,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_MACD_SIGNAL",
+            "value": -2.182086,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_MACD_CROSS",
+            "value": -1.59897,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_ADX",
+            "value": 17.889572,
+            "signal": "WEAK_TREND"
+          },
+          {
+            "key": "TV_ADX_PLUS",
+            "value": 21.905285,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_ADX_MINUS",
+            "value": 35.949889,
+            "signal": "N/A"
+          }
+        ],
+        "volume": [
+          {
+            "key": "TV_VOLUME",
+            "value": 5924116.0,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_VWMA_V",
+            "value": 432.185153,
+            "signal": "N/A"
+          }
+        ],
+        "pivots": [
+          {
+            "key": "PIVOT_CLASSIC_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S1",
+            "value": 388.9433,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S2",
+            "value": 347.5967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S3",
+            "value": 254.6467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R1",
+            "value": 481.8933,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R2",
+            "value": 533.4967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R3",
+            "value": 626.4467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S1",
+            "value": 405.0398,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S2",
+            "value": 383.1036,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S3",
+            "value": 347.5967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R1",
+            "value": 476.0536,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R2",
+            "value": 497.9898,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R3",
+            "value": 533.4967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S1",
+            "value": 421.7696,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S2",
+            "value": 413.2492,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S3",
+            "value": 404.7288,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R1",
+            "value": 438.8104,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R2",
+            "value": 447.3308,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R3",
+            "value": 455.8512,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_PP",
+            "value": 440.3375,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S1",
+            "value": 388.525,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S2",
+            "value": 347.3875,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S3",
+            "value": 295.575,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R1",
+            "value": 481.475,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R2",
+            "value": 533.2875,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R3",
+            "value": 574.425,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_PP",
+            "value": 430.21,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S1",
+            "value": 368.27,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S2",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S3",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R1",
+            "value": 461.22,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R2",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R3",
+            "value": null,
+            "signal": "N/A"
+          }
+        ]
+      },
+      "buy_count": 8,
+      "sell_count": 8,
+      "neutral_count": 10
+    },
+    "barchart": null,
+    "trendspotter": {
+      "ticker": "GLD",
+      "timestamp": "2026-04-26T20:31:15.104314",
+      "signal": "BUY",
+      "score": 0.25,
+      "strength": "WEAKEST",
+      "change": "BULLISH",
+      "signal_date": "2026-04-14",
+      "days_in_signal": 9
+    },
+    "yfinance": {
+      "source": "yfinance",
+      "ticker": "GLD",
+      "timestamp": "2026-04-26T20:31:15.103967",
+      "signal": "HOLD",
+      "score": -0.08,
+      "price": 433.25,
+      "timeframe_signals": {
+        "short": "Sell",
+        "medium": "Sell",
+        "long": "Buy"
+      },
+      "indicators": {
+        "moving_averages": [
+          {
+            "key": "SMA_20",
+            "value": 433.698,
+            "signal": "SELL"
+          },
+          {
+            "key": "SMA_50",
+            "value": 447.3286,
+            "signal": "SELL"
+          },
+          {
+            "key": "SMA_200",
+            "value": 388.6425,
+            "signal": "BUY"
+          },
+          {
+            "key": "EMA_9",
+            "value": 435.306486,
+            "signal": "SELL"
+          },
+          {
+            "key": "EMA_21",
+            "value": 436.150812,
+            "signal": "SELL"
+          }
+        ],
+        "oscillators": [
+          {
+            "key": "RSI_14",
+            "value": 47.469401,
+            "signal": "HOLD"
+          },
+          {
+            "key": "MACD",
+            "value": -1.598969,
+            "signal": "BUY"
+          },
+          {
+            "key": "STOCH",
+            "value": 40.61485,
+            "signal": "HOLD"
+          }
+        ],
+        "trend": [
+          {
+            "key": "ADX_14",
+            "value": 17.886506,
+            "signal": "HOLD"
+          },
+          {
+            "key": "BBANDS",
+            "value": null,
+            "signal": "HOLD"
+          }
+        ],
+        "volume": [
+          {
+            "key": "OBV",
+            "value": 454863000.0,
+            "signal": "SELL"
+          }
+        ]
+      },
+      "buy_count": 2,
+      "sell_count": 5,
+      "neutral_count": 4
+    },
+    "ai": null,
+    "consensus_signal": "HOLD",
+    "consensus_score": 0.0453,
+    "swing_event": null
+  },
+  {
+    "ticker": "GLD",
+    "timestamp": "2026-04-26T21:02:28.354655",
+    "tradingview": {
+      "source": "tradingview",
+      "ticker": "GLD",
+      "timestamp": "2026-04-26T21:02:30.193970",
+      "signal": "HOLD",
+      "score": 0.0,
+      "price": 433.25,
+      "timeframe_signals": {
+        "daily": "Neutral",
+        "weekly": "Neutral"
+      },
+      "indicators": {
+        "moving_averages": [
+          {
+            "key": "TV_SMA5",
+            "value": 434.242,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA10",
+            "value": 437.813,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA20",
+            "value": 433.698,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA30",
+            "value": 432.137667,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_SMA50",
+            "value": 447.3286,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA100",
+            "value": 434.5378,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_SMA200",
+            "value": 388.6425,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_EMA5",
+            "value": 434.36448,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA10",
+            "value": 435.35198,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA20",
+            "value": 436.001369,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA30",
+            "value": 437.621176,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA50",
+            "value": 438.452341,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_EMA100",
+            "value": 427.376236,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_EMA200",
+            "value": 395.490037,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_VWMA",
+            "value": 432.185153,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_HULL9",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_ICHI_B",
+            "value": 423.95,
+            "signal": "BUY"
+          }
+        ],
+        "oscillators": [
+          {
+            "key": "TV_RSI",
+            "value": 47.4694,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_STOCH_K",
+            "value": 40.614864,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_STOCH_D",
+            "value": 43.726516,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_CCI20",
+            "value": -4.720993,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_AO",
+            "value": -2.00301,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_MOMENTUM",
+            "value": -3.88,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_WILLIAMS",
+            "value": -60.351563,
+            "signal": "NEUTRAL"
+          },
+          {
+            "key": "TV_BBP",
+            "value": -4.870834,
+            "signal": "SELL"
+          },
+          {
+            "key": "TV_UO",
+            "value": 45.10641,
+            "signal": "NEUTRAL"
+          }
+        ],
+        "trend": [
+          {
+            "key": "TV_MACD_LINE",
+            "value": -1.59897,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_MACD_SIGNAL",
+            "value": -2.182086,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_MACD_CROSS",
+            "value": -1.59897,
+            "signal": "BUY"
+          },
+          {
+            "key": "TV_ADX",
+            "value": 17.889572,
+            "signal": "WEAK_TREND"
+          },
+          {
+            "key": "TV_ADX_PLUS",
+            "value": 21.905285,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_ADX_MINUS",
+            "value": 35.949889,
+            "signal": "N/A"
+          }
+        ],
+        "volume": [
+          {
+            "key": "TV_VOLUME",
+            "value": 5924116.0,
+            "signal": "N/A"
+          },
+          {
+            "key": "TV_VWMA_V",
+            "value": 432.185153,
+            "signal": "N/A"
+          }
+        ],
+        "pivots": [
+          {
+            "key": "PIVOT_CLASSIC_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S1",
+            "value": 388.9433,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S2",
+            "value": 347.5967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_S3",
+            "value": 254.6467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R1",
+            "value": 481.8933,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R2",
+            "value": 533.4967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CLASSIC_R3",
+            "value": 626.4467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S1",
+            "value": 405.0398,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S2",
+            "value": 383.1036,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_S3",
+            "value": 347.5967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R1",
+            "value": 476.0536,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R2",
+            "value": 497.9898,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_FIBONACCI_R3",
+            "value": 533.4967,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_PP",
+            "value": 440.5467,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S1",
+            "value": 421.7696,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S2",
+            "value": 413.2492,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_S3",
+            "value": 404.7288,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R1",
+            "value": 438.8104,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R2",
+            "value": 447.3308,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_CAMARILLA_R3",
+            "value": 455.8512,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_PP",
+            "value": 440.3375,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S1",
+            "value": 388.525,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S2",
+            "value": 347.3875,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_S3",
+            "value": 295.575,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R1",
+            "value": 481.475,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R2",
+            "value": 533.2875,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_WOODIE_R3",
+            "value": 574.425,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_PP",
+            "value": 430.21,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S1",
+            "value": 368.27,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S2",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_S3",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R1",
+            "value": 461.22,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R2",
+            "value": null,
+            "signal": "N/A"
+          },
+          {
+            "key": "PIVOT_DEMARK_R3",
+            "value": null,
+            "signal": "N/A"
+          }
+        ]
+      },
+      "buy_count": 8,
+      "sell_count": 8,
+      "neutral_count": 10
+    },
+    "yfinance": {
+      "source": "yfinance",
+      "ticker": "GLD",
+      "timestamp": "2026-04-26T21:02:30.294859",
+      "signal": "HOLD",
+      "score": -0.08,
+      "price": 433.25,
+      "timeframe_signals": {
+        "short": "Sell",
+        "medium": "Sell",
+        "long": "Buy"
+      },
+      "indicators": {
+        "moving_averages": [
+          {
+            "key": "SMA_20",
+            "value": 433.698,
+            "signal": "SELL"
+          },
+          {
+            "key": "SMA_50",
+            "value": 447.3286,
+            "signal": "SELL"
+          },
+          {
+            "key": "SMA_200",
+            "value": 388.6425,
+            "signal": "BUY"
+          },
+          {
+            "key": "EMA_9",
+            "value": 435.306486,
+            "signal": "SELL"
+          },
+          {
+            "key": "EMA_21",
+            "value": 436.150812,
+            "signal": "SELL"
+          }
+        ],
+        "oscillators": [
+          {
+            "key": "RSI_14",
+            "value": 47.469401,
+            "signal": "HOLD"
+          },
+          {
+            "key": "MACD",
+            "value": -1.598969,
+            "signal": "BUY"
+          },
+          {
+            "key": "STOCH",
+            "value": 40.61485,
+            "signal": "HOLD"
+          }
+        ],
+        "trend": [
+          {
+            "key": "ADX_14",
+            "value": 17.886506,
+            "signal": "HOLD"
+          },
+          {
+            "key": "BBANDS",
+            "value": null,
+            "signal": "HOLD"
+          }
+        ],
+        "volume": [
+          {
+            "key": "OBV",
+            "value": 454863000.0,
+            "signal": "SELL"
+          }
+        ]
+      },
+      "buy_count": 2,
+      "sell_count": 5,
+      "neutral_count": 4
+    },
+    "ai": null,
+    "consensus_signal": "HOLD",
+    "consensus_score": -0.032,
     "swing_event": null
   }
 ]

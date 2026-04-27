@@ -1,0 +1,134 @@
+═══════════════════════════════════════════════════════════════════════════════
+  MARKET TECHNICAL ANALYSIS   2026-04-26 21:02:42
+═══════════════════════════════════════════════════════════════════════════════
+
+INSTRUCTIONS
+───────────────────────────────────────────────────────────────────────────────
+You are a professional quantitative financial analyst. The dataset below contains
+raw technical indicator values captured in a single polling cycle. No buy/sell/hold
+recommendations, computed scores, or prior AI conclusions are included — derive
+every signal entirely from the raw numerical values provided.
+
+Produce the following output:
+
+  1. PER-TICKER SIGNAL ANALYSIS
+     For each security provide:
+       Signal      BUY | SELL | HOLD
+       Confidence  HIGH | MEDIUM | LOW
+       Factors     3–5 concise bullet points citing specific indicator values
+                   and what they imply (e.g. "RSI=72 → approaching overbought")
+
+  2. MARKET REGIME ASSESSMENT
+     Classify the current regime: Risk-On / Risk-Off / Neutral
+     Support with 2–3 sentences covering cross-ticker momentum, breadth,
+     trend alignment, and any notable divergences.
+
+  3. PROFESSIONAL SUMMARY DASHBOARD
+     Return a clean formatted table:
+
+     Ticker   | Signal | Conf.  | Price    | Key Factor
+     ---------|--------|--------|----------|----------------------------
+     (fill)   |        |        |          |
+
+DATA
+───────────────────────────────────────────────────────────────────────────────
+Sources  : TradingView · YFinance
+Captured : 2026-04-26 21:02:42
+Tickers  : AIQ · COMB · FXE · GLD · SPY · QQQ · MSFT · SLV
+───────────────────────────────────────────────────────────────────────────────
+
+▌ AIQ     $55.14      21:02:17
+  tv:daily:movi      SMA5=54.244 SMA10=53.394 SMA20=50.469 SMA30=49.738 SMA50=49.670 SMA100=50.549 SMA200=49.185 EMA5=54.195 EMA10=53.186 EMA20=51.686 EMA30=50.974 EMA50=50.482 EMA100=50.040 EMA200=48.389 VWMA=49.979 ICHI_B=49.810
+  tv:daily:osci      RSI=68.467 STOCH_K=93.901 STOCH_D=93.067 CCI20=102.8 AO=4.476 MOMENTUM=5.770 WILLIAMS=-0.239 BBP=4.202 UO=65.895
+  tv:daily:tren      MACD_LINE=1.610 MACD_SIGNAL=1.084 MACD_CROSS=1.610 ADX=24.028 ADX_PLUS=39.665 ADX_MINUS=24.843
+  tv:daily:volu      VOLUME=1.62M VWMA_V=49.979
+  tv:weekly    close=55.140 RSI=65.667 MACD=0.813 MACD_SIG=0.613 SMA20=50.474 SMA50=47.887 SMA200=34.364 ADX=16.885 ADX+DI=27.160 ADX-DI=18.694
+  yf:movi      SMA_20=50.469 SMA_50=49.670 SMA_200=49.160 EMA_9=53.389 EMA_21=51.587
+  yf:osci      RSI_14=68.468 MACD=1.610 STOCH=93.901
+  yf:tren      ADX_14=24.024
+  yf:volu      OBV=15.35M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ COMB    $26.48      21:02:22
+  tv:daily:movi      SMA5=26.246 SMA10=26.040 SMA20=26.100 SMA30=25.954 SMA50=25.123 SMA100=23.879 SMA200=22.789 EMA5=26.298 EMA10=26.151 EMA20=25.972 EMA30=25.736 EMA50=25.231 EMA100=24.291 EMA200=23.251 VWMA=26.335 ICHI_B=25.900
+  tv:daily:osci      RSI=60.082 STOCH_K=71.579 STOCH_D=61.784 CCI20=75.717 AO=0.307 MOMENTUM=0.906 WILLIAMS=-26.581 BBP=0.642 UO=58.195
+  tv:daily:tren      MACD_LINE=0.279 MACD_SIGNAL=0.289 MACD_CROSS=0.279 ADX=23.623 ADX_PLUS=40.532 ADX_MINUS=25.760
+  tv:daily:volu      VOLUME=18.5K VWMA_V=26.335
+  tv:weekly    close=26.476 RSI=66.723 MACD=1.104 MACD_SIG=0.898 SMA20=24.015 SMA50=22.574 SMA200=22.386 ADX=19.389 ADX+DI=32.569 ADX-DI=20.104
+  yf:movi      SMA_20=26.100 SMA_50=25.123 SMA_200=21.735 EMA_9=26.171 EMA_21=25.950
+  yf:osci      RSI_14=60.165 MACD=0.283 STOCH=71.577
+  yf:tren      ADX_14=24.240
+  yf:volu      OBV=4.45M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ FXE     $108.17     21:02:25
+  tv:daily:movi      SMA5=108.2 SMA10=108.5 SMA20=107.7 SMA30=107.3 SMA50=107.6 SMA100=108.0 SMA200=107.7 EMA5=108.2 EMA10=108.2 EMA20=107.9 EMA30=107.8 EMA50=107.8 EMA100=107.7 EMA200=107.0 VWMA=107.4 ICHI_B=107.5
+  tv:daily:osci      RSI=54.368 STOCH_K=54.160 STOCH_D=59.660 CCI20=30.006 AO=0.994 MOMENTUM=-0.090 WILLIAMS=-43.130 BBP=-0.028 UO=38.635
+  tv:daily:tren      MACD_LINE=0.291 MACD_SIGNAL=0.275 MACD_CROSS=0.291 ADX=20.270 ADX_PLUS=32.731 ADX_MINUS=26.381
+  tv:daily:volu      VOLUME=207.5K VWMA_V=107.4
+  tv:weekly    close=108.2 RSI=53.100 MACD=0.153 MACD_SIG=0.219 SMA20=108.0 SMA50=107.5 SMA200=100.9 ADX=13.146 ADX+DI=26.358 ADX-DI=24.963
+  yf:movi      SMA_20=107.7 SMA_50=107.6 SMA_200=107.4 EMA_9=108.2 EMA_21=107.9
+  yf:osci      RSI_14=54.637 MACD=0.309 STOCH=54.142
+  yf:tren      ADX_14=20.516
+  yf:volu      OBV=1.68M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ GLD     $433.25     21:02:28
+  tv:daily:movi      SMA5=434.2 SMA10=437.8 SMA20=433.7 SMA30=432.1 SMA50=447.3 SMA100=434.5 SMA200=388.6 EMA5=434.4 EMA10=435.4 EMA20=436.0 EMA30=437.6 EMA50=438.5 EMA100=427.4 EMA200=395.5 VWMA=432.2 ICHI_B=423.9
+  tv:daily:osci      RSI=47.469 STOCH_K=40.615 STOCH_D=43.727 CCI20=-4.721 AO=-2.003 MOMENTUM=-3.880 WILLIAMS=-60.352 BBP=-4.871 UO=45.106
+  tv:daily:tren      MACD_LINE=-1.599 MACD_SIGNAL=-2.182 MACD_CROSS=-1.599 ADX=17.890 ADX_PLUS=21.905 ADX_MINUS=35.950
+  tv:daily:volu      VOLUME=5.92M VWMA_V=432.2
+  tv:weekly    close=433.2 RSI=54.931 MACD=17.988 MACD_SIG=23.986 SMA20=436.3 SMA50=375.3 SMA200=246.2 ADX=50.418 ADX+DI=31.552 ADX-DI=17.537
+  yf:movi      SMA_20=433.7 SMA_50=447.3 SMA_200=388.6 EMA_9=435.3 EMA_21=436.2
+  yf:osci      RSI_14=47.469 MACD=-1.599 STOCH=40.615
+  yf:tren      ADX_14=17.887
+  yf:volu      OBV=454.86M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ SPY     $713.94     21:02:31
+  tv:daily:movi      SMA5=709.3 SMA10=703.9 SMA20=681.0 SMA30=673.4 SMA50=677.0 SMA100=682.2 SMA200=668.7 EMA5=709.0 EMA10=701.7 EMA20=690.3 EMA30=685.0 EMA50=681.4 EMA100=677.2 EMA200=662.0 VWMA=674.1 ICHI_B=671.9
+  tv:daily:osci      RSI=70.148 STOCH_K=96.995 STOCH_D=94.602 CCI20=94.868 AO=35.488 MOMENTUM=34.480 WILLIAMS=-0.836 BBP=28.438 UO=69.911
+  tv:daily:tren      MACD_LINE=12.269 MACD_SIGNAL=8.402 MACD_CROSS=12.269 ADX=25.528 ADX_PLUS=32.847 ADX_MINUS=23.552
+  tv:daily:volu      VOLUME=45.18M VWMA_V=674.1
+  tv:weekly    close=713.9 RSI=63.895 MACD=7.402 MACD_SIG=6.467 SMA20=681.4 SMA50=657.0 SMA200=523.6 ADX=15.620 ADX+DI=25.342 ADX-DI=19.711
+  yf:movi      SMA_20=681.0 SMA_50=676.1 SMA_200=665.5 EMA_9=703.2 EMA_21=689.4
+  yf:osci      RSI_14=70.450 MACD=12.512 STOCH=96.995
+  yf:tren      ADX_14=25.588
+  yf:volu      OBV=1459.00M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ QQQ     $663.88     21:02:34
+  tv:daily:movi      SMA5=652.3 SMA10=643.4 SMA20=615.3 SMA30=606.9 SMA50=606.4 SMA100=612.9 SMA200=601.4 EMA5=653.0 EMA10=642.2 EMA20=627.0 EMA30=619.5 EMA50=614.0 EMA100=608.8 EMA200=592.8 VWMA=608.4 ICHI_B=610.1
+  tv:daily:osci      RSI=74.875 STOCH_K=97.333 STOCH_D=96.192 CCI20=113.0 AO=44.778 MOMENTUM=52.810 WILLIAMS=-0.732 BBP=47.886 UO=73.213
+  tv:daily:tren      MACD_LINE=16.477 MACD_SIGNAL=11.140 MACD_CROSS=16.477 ADX=28.278 ADX_PLUS=37.757 ADX_MINUS=17.210
+  tv:daily:volu      VOLUME=45.56M VWMA_V=608.4
+  tv:weekly    close=663.9 RSI=66.822 MACD=9.007 MACD_SIG=6.054 SMA20=611.7 SMA50=589.1 SMA200=444.3 ADX=17.067 ADX+DI=28.723 ADX-DI=19.063
+  yf:movi      SMA_20=615.3 SMA_50=606.0 SMA_200=600.1 EMA_9=644.3 EMA_21=625.9
+  yf:osci      RSI_14=74.919 MACD=16.584 STOCH=97.333
+  yf:tren      ADX_14=28.146
+  yf:volu      OBV=1187.15M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ MSFT    $424.62     21:02:37
+  tv:daily:movi      SMA5=423.1 SMA10=414.7 SMA20=392.0 SMA30=389.7 SMA50=394.1 SMA100=429.2 SMA200=470.1 EMA5=421.3 EMA10=413.4 EMA20=403.0 EMA30=400.2 EMA50=404.2 EMA100=423.4 EMA200=441.9 VWMA=393.0 ICHI_B=395.0
+  tv:daily:osci      RSI=63.457 STOCH_K=86.206 STOCH_D=87.546 CCI20=87.991 AO=30.263 MOMENTUM=53.750 WILLIAMS=-13.524 BBP=22.262 UO=56.251
+  tv:daily:tren      MACD_LINE=9.824 MACD_SIGNAL=4.604 MACD_CROSS=9.824 ADX=31.135 ADX_PLUS=38.433 ADX_MINUS=21.861
+  tv:daily:volu      VOLUME=27.46M VWMA_V=393.0
+  tv:weekly    close=424.6 RSI=48.590 MACD=-22.539 MACD_SIG=-23.820 SMA20=424.4 SMA50=469.0 SMA200=381.0 ADX=36.970 ADX+DI=20.353 ADX-DI=24.313
+  yf:movi      SMA_20=392.0 SMA_50=394.0 SMA_200=468.7 EMA_9=415.0 EMA_21=402.5
+  yf:osci      RSI_14=63.481 MACD=9.852 STOCH=86.206
+  yf:tren      ADX_14=31.004
+  yf:volu      OBV=156.82M
+───────────────────────────────────────────────────────────────────────────────
+
+▌ SLV     $68.79      21:02:40
+  tv:daily:movi      SMA5=69.636 SMA10=70.521 SMA20=68.561 SMA30=67.869 SMA50=71.146 SMA100=71.115 SMA200=55.570 EMA5=69.488 EMA10=69.642 EMA20=69.453 EMA30=69.782 EMA50=70.188 EMA100=67.281 EMA200=58.780 VWMA=68.225 ICHI_B=67.765
+  tv:daily:osci      RSI=48.163 STOCH_K=50.000 STOCH_D=52.945 CCI20=7.900 AO=0.922 MOMENTUM=-0.290 WILLIAMS=-53.261 BBP=-1.545 UO=44.433
+  tv:daily:tren      MACD_LINE=-0.055 MACD_SIGNAL=-0.305 MACD_CROSS=-0.055 ADX=13.623 ADX_PLUS=25.795 ADX_MINUS=37.353
+  tv:daily:volu      VOLUME=16.38M VWMA_V=68.225
+  tv:weekly    close=68.790 RSI=53.493 MACD=4.908 MACD_SIG=6.721 SMA20=71.403 SMA50=51.617 SMA200=30.500 ADX=59.767 ADX+DI=29.713 ADX-DI=9.921
+  yf:movi      SMA_20=68.561 SMA_50=71.146 SMA_200=55.570 EMA_9=69.669 EMA_21=69.470
+  yf:osci      RSI_14=48.163 MACD=-0.055 STOCH=50.000
+  yf:tren      ADX_14=13.607
+  yf:volu      OBV=1807.41M
+───────────────────────────────────────────────────────────────────────────────

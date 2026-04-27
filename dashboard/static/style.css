@@ -74,13 +74,23 @@ header h1 {
 
 .separator { opacity: 0.4; }
 
+/* ---- Status dot ---- */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
 .status-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--na);
   transition: background 0.3s;
 }
-.status-dot.live { background: var(--buy); box-shadow: 0 0 6px var(--buy); }
+.status-dot.ok      { background: var(--buy);  box-shadow: 0 0 6px var(--buy); }
+.status-dot.loading { background: var(--hold); animation: pulse-dot 1s ease-in-out infinite; }
+.status-dot.error   { background: var(--sell); box-shadow: 0 0 6px var(--sell); }
+/* legacy aliases */
+.status-dot.live  { background: var(--buy);  box-shadow: 0 0 6px var(--buy); }
 .status-dot.stale { background: var(--hold); }
 
 /* ---- Main ---- */
@@ -149,6 +159,29 @@ tbody tr {
 tbody tr:hover { background: var(--surface2); }
 tbody tr:last-child td { border-bottom: none; }
 
+/* ---- BUY / SELL row highlighting ---- */
+tr.row-buy {
+  background: rgba(63, 185, 80, 0.06);
+  box-shadow: inset 4px 0 0 var(--buy);
+}
+tr.row-buy:hover {
+  background: rgba(63, 185, 80, 0.13) !important;
+}
+
+tr.row-sell {
+  background: rgba(248, 81, 73, 0.06);
+  box-shadow: inset 4px 0 0 var(--sell);
+}
+tr.row-sell:hover {
+  background: rgba(248, 81, 73, 0.13) !important;
+}
+
+/* Swing left-border overrides buy/sell when both classes present */
+tr.has-swing-STRONG_SWING  { box-shadow: inset 4px 0 0 var(--swing-strong); }
+tr.has-swing-WEAK_SWING    { box-shadow: inset 4px 0 0 var(--swing-weak); }
+tr.has-swing-SCORE_SWING   { box-shadow: inset 4px 0 0 var(--swing-score); }
+tr.has-swing-SIGNAL_CHANGE { box-shadow: inset 4px 0 0 var(--swing-change); }
+
 .loading {
   text-align: center;
   color: var(--text-muted);
@@ -163,15 +196,53 @@ tbody tr:last-child td { border-bottom: none; }
   border-radius: 4px;
   font-weight: 700;
   font-size: 11px;
-  letter-spacing: 0.5px;
-  min-width: 44px;
+  letter-spacing: 0.4px;
+  min-width: 40px;
   text-align: center;
+  font-family: var(--font);
 }
 
-.badge-BUY   { background: var(--buy-bg);  color: var(--buy);  border: 1px solid var(--buy); }
-.badge-SELL  { background: var(--sell-bg); color: var(--sell); border: 1px solid var(--sell); }
-.badge-HOLD  { background: var(--hold-bg); color: var(--hold); border: 1px solid var(--hold); }
-.badge-NA    { background: transparent;    color: var(--na);   border: 1px solid var(--border); }
+.badge-BUY  {
+  background: var(--buy-bg);
+  color: var(--buy);
+  border: 1px solid var(--buy);
+  box-shadow: 0 0 5px rgba(63,185,80,0.25);
+}
+.badge-SELL {
+  background: var(--sell-bg);
+  color: var(--sell);
+  border: 1px solid var(--sell);
+  box-shadow: 0 0 5px rgba(248,81,73,0.2);
+}
+.badge-HOLD {
+  background: var(--hold-bg);
+  color: var(--hold);
+  border: 1px solid var(--hold);
+}
+.badge-NA {
+  background: transparent;
+  color: var(--na);
+  border: 1px solid var(--border);
+}
+.badge-OVERBOUGHT {
+  background: rgba(255,166,87,0.1);
+  color: var(--swing-weak);
+  border: 1px solid var(--swing-weak);
+}
+.badge-OVERSOLD {
+  background: rgba(121,192,255,0.1);
+  color: var(--swing-change);
+  border: 1px solid var(--swing-change);
+}
+
+/* Emphasise the consensus badge */
+.consensus-col .badge {
+  font-size: 12px;
+  padding: 3px 10px;
+  min-width: 52px;
+}
+.consensus-col .badge-BUY  { box-shadow: 0 0 10px rgba(63,185,80,0.45); }
+.consensus-col .badge-SELL { box-shadow: 0 0 10px rgba(248,81,73,0.35); }
 
 /* ---- Swing badges ---- */
 .swing-badge {
@@ -181,17 +252,12 @@ tbody tr:last-child td { border-bottom: none; }
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.3px;
+  font-family: var(--font);
 }
 .swing-STRONG_SWING  { background: rgba(255,123,114,0.15); color: var(--swing-strong); border: 1px solid var(--swing-strong); }
 .swing-WEAK_SWING    { background: rgba(255,166,87,0.15);  color: var(--swing-weak);   border: 1px solid var(--swing-weak); }
 .swing-SCORE_SWING   { background: rgba(210,153,34,0.15);  color: var(--swing-score);  border: 1px solid var(--swing-score); }
 .swing-SIGNAL_CHANGE { background: rgba(121,192,255,0.15); color: var(--swing-change); border: 1px solid var(--swing-change); }
-
-/* Row highlighting for swing events */
-tr.has-swing-STRONG_SWING  { box-shadow: inset 3px 0 0 var(--swing-strong); }
-tr.has-swing-WEAK_SWING    { box-shadow: inset 3px 0 0 var(--swing-weak); }
-tr.has-swing-SCORE_SWING   { box-shadow: inset 3px 0 0 var(--swing-score); }
-tr.has-swing-SIGNAL_CHANGE { box-shadow: inset 3px 0 0 var(--swing-change); }
 
 /* ---- Score bar ---- */
 .score-cell {
@@ -200,17 +266,37 @@ tr.has-swing-SIGNAL_CHANGE { box-shadow: inset 3px 0 0 var(--swing-change); }
   gap: 6px;
 }
 .score-bar-wrap {
-  width: 60px; height: 6px;
+  position: relative;
+  width: 56px; height: 6px;
   background: var(--surface2);
   border-radius: 3px;
   overflow: hidden;
+  flex-shrink: 0;
+}
+.score-bar-wrap::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0;
+  width: 1px; height: 100%;
+  background: var(--border);
+  pointer-events: none;
 }
 .score-bar {
   height: 100%;
   border-radius: 3px;
   transition: width 0.4s;
 }
-.score-val { font-size: 12px; min-width: 52px; }
+.score-val {
+  font-size: 11px;
+  min-width: 50px;
+  text-align: right;
+}
+.num-buy  { color: var(--buy); }
+.num-sell { color: var(--sell); }
+.num-hold { color: var(--hold); }
+
+/* ---- Utility ---- */
+.muted { color: var(--text-muted); }
 
 /* ---- Ticker cell ---- */
 .ticker-cell {
@@ -218,10 +304,14 @@ tr.has-swing-SIGNAL_CHANGE { box-shadow: inset 3px 0 0 var(--swing-change); }
   font-size: 14px;
   color: var(--accent);
   letter-spacing: 0.5px;
+  font-family: var(--font);
 }
 
 /* ---- Price cell ---- */
 .price-cell { color: var(--text); font-weight: 500; }
+
+/* ---- Time column ---- */
+.time-col { font-size: 12px; }
 
 /* ---- AI target ---- */
 .ai-target { color: var(--text-muted); font-size: 12px; }
@@ -237,9 +327,10 @@ tr.has-swing-SIGNAL_CHANGE { box-shadow: inset 3px 0 0 var(--swing-change); }
   border-left: 4px solid var(--swing-strong);
   margin-bottom: 10px;
 }
-.swing-alert-card .alert-ticker { font-weight: 700; font-size: 16px; color: var(--accent); min-width: 60px; }
-.swing-alert-card .alert-detail { color: var(--text-muted); font-size: 13px; }
-.swing-alert-card .alert-arrow  { font-size: 18px; }
+.swing-alert-card:last-child { margin-bottom: 0; }
+.swing-alert-card .alert-ticker { font-weight: 700; font-size: 16px; color: var(--accent); min-width: 60px; font-family: var(--font); }
+.swing-alert-card .alert-detail { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+.swing-alert-card .alert-arrow  { font-size: 20px; }
 
 /* ---- Status grid ---- */
 .status-grid {

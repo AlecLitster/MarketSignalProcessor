@@ -9,8 +9,6 @@ pandas, Excel, or downstream ML pipelines.
 Columns:
   timestamp, ticker, price,
   tv_signal, tv_score, tv_buy, tv_sell, tv_neutral,
-  bc_signal, bc_score, bc_buy, bc_sell, bc_neutral,
-  ts_signal, ts_strength, ts_score, ts_days,
   ai_signal, ai_confidence, ai_price_target, ai_target_date,
   consensus_signal, consensus_score,
   swing_label, swing_delta
@@ -41,8 +39,6 @@ log = logging.getLogger(__name__)
 _COLUMNS = [
     "timestamp", "ticker", "price",
     "tv_signal", "tv_score", "tv_buy", "tv_sell", "tv_neutral",
-    "bc_signal", "bc_score", "bc_buy", "bc_sell", "bc_neutral",
-    "ts_signal", "ts_strength", "ts_score", "ts_days",
     "ai_signal", "ai_confidence", "ai_price_target",
     "ai_price_target_low", "ai_price_target_high",
     "ai_target_date", "ai_target_date_range",
@@ -78,8 +74,6 @@ def _ensure_header() -> None:
 def _result_to_row(result: CycleResult) -> dict:
     """Flatten a CycleResult into a CSV row dict."""
     tv = result.tradingview
-    bc = result.barchart
-    ts = result.trendspotter
     ai = result.ai
     sw = result.swing_event
 
@@ -91,16 +85,7 @@ def _result_to_row(result: CycleResult) -> dict:
         "tv_score":           tv.score         if tv else "",
         "tv_buy":             tv.buy_count      if tv else "",
         "tv_sell":            tv.sell_count     if tv else "",
-        "tv_neutral":         tv.neutral_count  if tv else "",
-        "bc_signal":          bc.signal        if bc else "",
-        "bc_score":           bc.score         if bc else "",
-        "bc_buy":             bc.buy_count      if bc else "",
-        "bc_sell":            bc.sell_count     if bc else "",
-        "bc_neutral":         bc.neutral_count  if bc else "",
-        "ts_signal":          ts.signal        if ts else "",
-        "ts_strength":        ts.strength      if ts else "",
-        "ts_score":           ts.score         if ts else "",
-        "ts_days":            ts.days_in_signal if ts else "",
+        "tv_neutral":         tv.neutral_count if tv else "",
         "ai_signal":          ai.signal               if ai else "",
         "ai_confidence":      ai.confidence           if ai else "",
         "ai_price_target":    ai.price_target         if ai else "",
