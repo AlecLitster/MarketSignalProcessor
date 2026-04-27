@@ -27,6 +27,7 @@ TICKERS: list[dict] = [
     {"symbol": "COPX",  "exchange": "NYSE"},
     {"symbol": "FXE",   "exchange": "AMEX"},
     {"symbol": "GLD",   "exchange": "AMEX"},
+    {"symbol": "IBIT",   "exchange": "NASDAQ"},
     {"symbol": "SPY",   "exchange": "AMEX"},
     {"symbol": "QQQ",   "exchange": "NASDAQ"},
     {"symbol": "MSFT",  "exchange": "NASDAQ"},
@@ -94,8 +95,8 @@ SIGNAL_SCORE_MAP: dict[str, float] = {
 # ---------------------------------------------------------------------------
 
 CONSENSUS_WEIGHTS: dict[str, float] = {
-    "tradingview": 0.60,
-    "yfinance":    0.40,
+    "tradingview": 0.70,
+    "yfinance":    0.30,
 }
 
 # ---------------------------------------------------------------------------
