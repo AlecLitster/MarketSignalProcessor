@@ -87,15 +87,6 @@ def detect_swing(
         prev_tv = recent[-1].get("tradingview")
         if prev_tv and prev_tv.get("signal") != result.tradingview.signal:
             sources_changed.append("tradingview")
-    if result.barchart and len(recent) > 0:
-        prev_bc = recent[-1].get("barchart")
-        if prev_bc and prev_bc.get("signal") != result.barchart.signal:
-            sources_changed.append("barchart")
-    if result.trendspotter and len(recent) > 0:
-        prev_ts = recent[-1].get("trendspotter")
-        if prev_ts and prev_ts.get("signal") != result.trendspotter.signal:
-            sources_changed.append("trendspotter")
-
     event = SwingEvent(
         ticker          = result.ticker,
         timestamp       = result.timestamp,

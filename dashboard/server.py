@@ -107,25 +107,18 @@ def _load_last_signals() -> None:
             if not history:
                 continue
             last = history[-1]
-            tv   = last.get("tradingview")  or {}
-            bc   = last.get("barchart")     or {}
-            ts   = last.get("trendspotter") or {}
-            yf   = last.get("yfinance")     or {}
+            tv   = last.get("tradingview") or {}
+            yf   = last.get("yfinance")    or {}
             ai   = last.get("ai")           or {}
             sw   = last.get("swing_event")  or {}
             price = (tv.get("price") if tv.get("price") is not None
-                     else bc.get("price") if bc.get("price") is not None
                      else yf.get("price"))
             summaries.append({
                 "ticker":           symbol,
                 "price":            price,
-                "tv_signal":        tv.get("signal",   "N/A"),
+                "tv_signal":        tv.get("signal", "N/A"),
                 "tv_score":         tv.get("score"),
-                "bc_signal":        bc.get("signal",   "N/A"),
-                "bc_score":         bc.get("score"),
-                "ts_signal":        ts.get("signal",   "N/A"),
-                "ts_strength":      ts.get("strength", "N/A"),
-                "yf_signal":        yf.get("signal",   "N/A"),
+                "yf_signal":        yf.get("signal", "N/A"),
                 "yf_score":         yf.get("score"),
                 "ai_signal":        ai.get("signal",   "N/A"),
                 "ai_confidence":    ai.get("confidence", "N/A"),

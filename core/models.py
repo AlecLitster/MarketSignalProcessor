@@ -43,12 +43,12 @@ class IndicatorValue:
 @dataclass
 class SourceSignal:
     """
-    Normalised output from a single signal source (TradingView or BarChart).
+    Normalised output from a single signal source (TradingView or YFinance).
 
     indicators groups IndicatorValue lists by category so the dashboard
     and loggers can render them without knowing which source produced them.
     """
-    source:            str         # "tradingview" | "barchart"
+    source:            str         # "tradingview" | "yfinance"
     ticker:            str
     timestamp:         datetime
     signal:            str         # BUY | SELL | HOLD
@@ -81,41 +81,7 @@ class SourceSignal:
 
 
 # ---------------------------------------------------------------------------
-# TrendSpotter — BarChart's proprietary signal (Signal #3)
-# ---------------------------------------------------------------------------
-
-@dataclass
-class TrendSpotterSignal:
-    """
-    BarChart TrendSpotter — treated as an independent signal source so
-    divergence from BC Opinion is visible in the dashboard and contributes
-    separately to the consensus.
-    """
-    ticker:         str
-    timestamp:      datetime
-    signal:         str            # BUY | SELL | HOLD
-    score:          float          # ±1.0 / ±0.75 / ±0.5 / ±0.25 / 0.0
-    strength:       str            # STRONGEST | STRONG | WEAK | WEAKEST | N/A
-    change:         str            # BULLISH | BEARISH | NEUTRAL | N/A
-    signal_date:    Optional[str]  # date TrendSpotter last flipped
-    days_in_signal: Optional[int]
-    raw:            dict = field(default_factory=dict)
-
-    def as_dict(self) -> dict:
-        return {
-            "ticker":         self.ticker,
-            "timestamp":      self.timestamp.isoformat(),
-            "signal":         self.signal,
-            "score":          self.score,
-            "strength":       self.strength,
-            "change":         self.change,
-            "signal_date":    self.signal_date,
-            "days_in_signal": self.days_in_signal,
-        }
-
-
-# ---------------------------------------------------------------------------
-# AI Synopsis — Claude's interpretation (Signal #4)
+# AI Synopsis — Claude's interpretation (Signal #3)
 # ---------------------------------------------------------------------------
 
 @dataclass
@@ -217,11 +183,9 @@ class CycleResult:
     """
     ticker:           str
     timestamp:        datetime
-    tradingview:      Optional[SourceSignal]       = None   # Signal #1
-    barchart:         Optional[SourceSignal]       = None   # Signal #2
-    trendspotter:     Optional[TrendSpotterSignal] = None   # Signal #3
-    yfinance:         Optional[SourceSignal]       = None   # Signal #4
-    ai:               Optional[AISignal]           = None   # Signal #5
+    tradingview:      Optional[SourceSignal] = None   # Signal #1
+    yfinance:         Optional[SourceSignal] = None   # Signal #2
+    ai:               Optional[AISignal]     = None   # Signal #3
     consensus_signal: str   = "HOLD"
     consensus_score:  float = 0.0
     swing_event:      Optional[SwingEvent] = None
@@ -230,10 +194,8 @@ class CycleResult:
         return {
             "ticker":           self.ticker,
             "timestamp":        self.timestamp.isoformat(),
-            "tradingview":      self.tradingview.as_dict()  if self.tradingview  else None,
-            "barchart":         self.barchart.as_dict()     if self.barchart     else None,
-            "trendspotter":     self.trendspotter.as_dict() if self.trendspotter else None,
-            "yfinance":         self.yfinance.as_dict()     if self.yfinance     else None,
+            "tradingview":      self.tradingview.as_dict() if self.tradingview else None,
+            "yfinance":         self.yfinance.as_dict()    if self.yfinance    else None,
             "ai":               self.ai.as_dict()           if self.ai           else None,
             "consensus_signal": self.consensus_signal,
             "consensus_score":  self.consensus_score,
@@ -242,11 +204,9 @@ class CycleResult:
 
     @property
     def price(self) -> Optional[float]:
-        """Best available price — prefer TradingView, then BarChart, then yfinance."""
+        """Best available price — prefer TradingView, then yfinance."""
         if self.tradingview and self.tradingview.price is not None:
             return self.tradingview.price
-        if self.barchart and self.barchart.price is not None:
-            return self.barchart.price
         if self.yfinance and self.yfinance.price is not None:
             return self.yfinance.price
         return None
@@ -263,11 +223,7 @@ class CycleResult:
             "price":            self.price,
             "tv_signal":        self.tradingview.signal    if self.tradingview  else "N/A",
             "tv_score":         self.tradingview.score     if self.tradingview  else None,
-            "bc_signal":        self.barchart.signal       if self.barchart     else "N/A",
-            "bc_score":         self.barchart.score        if self.barchart     else None,
-            "ts_signal":        self.trendspotter.signal   if self.trendspotter else "N/A",
-            "ts_strength":      self.trendspotter.strength if self.trendspotter else "N/A",
-            "yf_signal":        self.yfinance.signal       if self.yfinance     else "N/A",
+            "yf_signal":        self.yfinance.signal  if self.yfinance  else "N/A",
             "yf_score":         self.yfinance.score        if self.yfinance     else None,
             "ai_signal":        self.ai.signal             if self.ai           else "N/A",
             "ai_confidence":    self.ai.confidence         if self.ai           else "N/A",

@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signal Processor Dashboard</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
   <header>
@@ -31,10 +31,6 @@
               <th>Price</th>
               <th>TradingView</th>
               <th>TV Score</th>
-              <th>BarChart</th>
-              <th>BC Score</th>
-              <th>TrendSpotter</th>
-              <th>TS Strength</th>
               <th>YFinance</th>
               <th>YF Score</th>
               <th>AI Signal</th>
@@ -47,7 +43,7 @@
             </tr>
           </thead>
           <tbody id="summary-body">
-            <tr><td colspan="17" class="loading">Loading...</td></tr>
+            <tr><td colspan="13" class="loading">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -71,8 +67,6 @@
               <th>Consensus</th>
               <th>Score</th>
               <th>TV</th>
-              <th>BC</th>
-              <th>TS</th>
               <th>YF</th>
               <th>AI</th>
               <th>Price</th>
@@ -80,7 +74,7 @@
             </tr>
           </thead>
           <tbody id="history-body">
-            <tr><td colspan="10" class="loading">Select a ticker row above.</td></tr>
+            <tr><td colspan="8" class="loading">Select a ticker row above.</td></tr>
           </tbody>
         </table>
       </div>
@@ -98,6 +92,6 @@
     <span id="footer-time"></span>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="/static/app.js"></script>
 </body>
 </html>
