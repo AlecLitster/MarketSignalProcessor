@@ -43,6 +43,9 @@ log = logging.getLogger(__name__)
 
 class YFinanceSource(SignalSource):
 
+    def __init__(self) -> None:
+        self._df_cache: dict = {}
+
     @property
     def name(self) -> str:
         return "yfinance"
@@ -68,9 +71,11 @@ class YFinanceSource(SignalSource):
         df = self._download(yf, ticker)
         if df is None or len(df) < YF_MIN_PERIODS:
             log.warning("YF: insufficient data for %s (%d rows)", ticker, len(df) if df is not None else 0)
+            self._df_cache.pop(ticker.upper(), None)
             return None
 
         df = self._apply_indicators(df)
+        self._df_cache[ticker.upper()] = df
         return self._build_signal(ticker, df)
 
     # ------------------------------------------------------------------
@@ -114,6 +119,7 @@ class YFinanceSource(SignalSource):
             df.ta.adx(length=14,  append=True)
             df.ta.bbands(length=20, std=2.0, append=True)
             df.ta.obv(append=True)
+            df.ta.supertrend(length=7, multiplier=3.0, append=True)
         except Exception as exc:
             log.warning("YF: indicator computation error: %s", exc)
         return df

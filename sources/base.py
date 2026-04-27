@@ -16,7 +16,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from core.models import SourceSignal, TrendSpotterSignal
+from core.models import SourceSignal
 
 
 class SignalSource(ABC):
@@ -44,15 +44,3 @@ class SignalSource(ABC):
         ...
 
 
-class TrendSpotterSource(ABC):
-    """Separate interface for TrendSpotter (BarChart proprietary signal)."""
-
-    @abstractmethod
-    def fetch_trendspotter(self, ticker: str) -> Optional[TrendSpotterSignal]:
-        """
-        Fetch TrendSpotter signal for one ticker.
-
-        Returns:
-            TrendSpotterSignal on success, None on failure.
-        """
-        ...
