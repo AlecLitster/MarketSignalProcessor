@@ -5,7 +5,7 @@ MarketSignalProcessor orchestrator.
 
 Per-cycle pipeline for each ticker:
   1. Load per-ticker history from JSON store
-  2. Fetch signals from all enabled sources (TradingView, BarChart, TrendSpotter)
+  2. Fetch signals from all enabled sources (TradingView, YFinance)
   3. Compute weighted consensus
   4. Detect swing events vs. rolling history baseline
   5. Generate Claude AI synopsis (only for non-HOLD signals or detected swings)
@@ -29,7 +29,6 @@ from config.settings import (
     TICKERS,
     POLLING_INTERVAL_SECONDS,
     TRADINGVIEW_ENABLED,
-    BARCHART_ENABLED,
     YFINANCE_ENABLED,
     CLAUDE_AI_SYNOPSIS_ENABLED,
     AI_HISTORY_CYCLES,
@@ -44,6 +43,7 @@ from core.aggregator import aggregate
 from core.swing import detect_swings
 from stores.ticker_store import load_history_map, save_all
 from stores.csv_log import write as write_csv
+from stores.ai_prompt_log import write as write_ai_prompt
 import dashboard.server as dashboard
 
 # ---------------------------------------------------------------------------
@@ -62,17 +62,12 @@ log = logging.getLogger("main")
 # ---------------------------------------------------------------------------
 
 _tv_source  = None
-_bc_source  = None
 _yf_source  = None
 _ai         = None
 
 if TRADINGVIEW_ENABLED:
     from sources.tradingview import TradingViewSource
     _tv_source = TradingViewSource()
-
-if BARCHART_ENABLED:
-    from sources.barchart import BarChartSource
-    _bc_source = BarChartSource()
 
 if YFINANCE_ENABLED:
     from sources.yfinance_source import YFinanceSource
@@ -94,10 +89,6 @@ def _fetch_one(ticker: dict) -> CycleResult:
 
     if _tv_source:
         result.tradingview = _tv_source.fetch(symbol, exchange)
-
-    if _bc_source:
-        result.barchart     = _bc_source.fetch(symbol, exchange)
-        result.trendspotter = _bc_source.fetch_trendspotter(symbol)
 
     if _yf_source:
         result.yfinance = _yf_source.fetch(symbol, exchange)
@@ -136,20 +127,19 @@ def run_cycle() -> None:
         _maybe_add_ai(result, history[-AI_HISTORY_CYCLES:])
 
         log.info(
-            "%-8s  %s  score=%+.4f  TV=%-5s  BC=%-5s  TS=%-5s  YF=%-5s  AI=%-5s  swing=%s",
+            "%-8s  %s  score=%+.4f  TV=%-5s  YF=%-5s  AI=%-5s  swing=%s",
             result.ticker,
             result.consensus_signal,
             result.consensus_score,
-            getattr(result.tradingview,  "signal", "N/A"),
-            getattr(result.barchart,     "signal", "N/A"),
-            getattr(result.trendspotter, "signal", "N/A"),
-            getattr(result.yfinance,     "signal", "N/A"),
+            getattr(result.tradingview, "signal", "N/A"),
+            getattr(result.yfinance,    "signal", "N/A"),
             getattr(result.ai,           "signal", "—"),
             result.swing_event.label if result.swing_event else "—",
         )
 
     save_all(results)
     write_csv(results)
+    write_ai_prompt(results)
     dashboard.update([r.signal_summary for r in results])
     log.info("━━━ Cycle done ━━━")
 

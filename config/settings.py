@@ -22,12 +22,16 @@ load_dotenv()
 # ---------------------------------------------------------------------------
 
 TICKERS: list[dict] = [
+    {"symbol": "AIQ",   "exchange": "NASDAQ"},
+    {"symbol": "COMB",  "exchange": "AMEX"},
+    {"symbol": "COPX",  "exchange": "NYSE"},
+    {"symbol": "FXE",   "exchange": "AMEX"},
+    {"symbol": "GLD",   "exchange": "AMEX"},
     {"symbol": "SPY",   "exchange": "AMEX"},
     {"symbol": "QQQ",   "exchange": "NASDAQ"},
-    {"symbol": "GLD",   "exchange": "AMEX"},
     {"symbol": "MSFT",  "exchange": "NASDAQ"},
     {"symbol": "SLV",   "exchange": "AMEX"},
-    {"symbol": "COMB",  "exchange": "AMEX"},
+    
 ]
 
 # ---------------------------------------------------------------------------
@@ -41,7 +45,6 @@ POLLING_INTERVAL_SECONDS: int = int(os.environ.get("POLLING_INTERVAL_SECONDS", 9
 # ---------------------------------------------------------------------------
 
 TRADINGVIEW_ENABLED:        bool = os.environ.get("TRADINGVIEW_ENABLED",        "true").lower()  == "true"
-BARCHART_ENABLED:           bool = os.environ.get("BARCHART_ENABLED",           "false").lower() == "true"
 YFINANCE_ENABLED:           bool = os.environ.get("YFINANCE_ENABLED",           "true").lower()  == "true"
 CLAUDE_AI_SYNOPSIS_ENABLED: bool = os.environ.get("CLAUDE_AI_SYNOPSIS_ENABLED", "true").lower()  == "true"
 TRADING_ENABLED:            bool = os.environ.get("TRADING_ENABLED",            "false").lower() == "true"
@@ -71,31 +74,6 @@ TV_TICKER_DELAY_SEC:  float = float(os.environ.get("TV_TICKER_DELAY_SEC",  1.0))
 TV_STARTUP_DELAY_SEC: float = float(os.environ.get("TV_STARTUP_DELAY_SEC", 1.0))
 
 # ---------------------------------------------------------------------------
-# BarChart
-# ---------------------------------------------------------------------------
-
-BARCHART_BASE_URL:     str = "https://www.barchart.com"
-BARCHART_OPINION_PATH: str = "/stocks/quotes/{symbol}/opinion"
-
-# Weights must sum to 1.0
-BARCHART_OPINION_WEIGHTS: dict[str, float] = {
-    "long":   0.50,
-    "medium": 0.30,
-    "short":  0.20,
-}
-
-TRENDSPOTTER_STRENGTH_SCORE: dict[str, float] = {
-    "STRONGEST": 1.00,
-    "STRONG":    0.75,
-    "WEAK":      0.50,
-    "WEAKEST":   0.25,
-    "N/A":       0.50,
-}
-
-BC_RETRY_ATTEMPTS:  int   = int(float(os.environ.get("BC_RETRY_ATTEMPTS",  3)))
-BC_RETRY_DELAY_SEC: float = float(os.environ.get("BC_RETRY_DELAY_SEC", 3.0))
-
-# ---------------------------------------------------------------------------
 # Signal scoring thresholds
 # ---------------------------------------------------------------------------
 
@@ -116,10 +94,8 @@ SIGNAL_SCORE_MAP: dict[str, float] = {
 # ---------------------------------------------------------------------------
 
 CONSENSUS_WEIGHTS: dict[str, float] = {
-    "tradingview":  0.35,
-    "barchart":     0.25,
-    "trendspotter": 0.20,
-    "yfinance":     0.20,
+    "tradingview": 0.60,
+    "yfinance":    0.40,
 }
 
 # ---------------------------------------------------------------------------
@@ -161,8 +137,10 @@ LOG_TICKER_DIR:           str  = os.path.join(LOG_DIR, "tickers")
 LOG_CSV_FILE:             str  = os.path.join(LOG_DIR, "signals.csv")
 LOG_CSV_MAX_BYTES:        int  = int(float(os.environ.get("LOG_CSV_MAX_BYTES",  10 * 1024 * 1024)))
 LOG_BACKUP_COUNT:         int  = int(float(os.environ.get("LOG_BACKUP_COUNT",   5)))
-LOG_TICKER_JSON_ENABLED:  bool = os.environ.get("LOG_TICKER_JSON_ENABLED", "true").lower()  == "true"
-LOG_CSV_ENABLED:          bool = os.environ.get("LOG_CSV_ENABLED",         "true").lower()  == "true"
+LOG_TICKER_JSON_ENABLED:  bool = os.environ.get("LOG_TICKER_JSON_ENABLED",  "true").lower() == "true"
+LOG_CSV_ENABLED:          bool = os.environ.get("LOG_CSV_ENABLED",          "true").lower() == "true"
+LOG_AI_PROMPT_ENABLED:    bool = os.environ.get("LOG_AI_PROMPT_ENABLED",    "true").lower() == "true"
+LOG_AI_PROMPT_FILE:       str  = os.path.join(LOG_DIR, "ai_prompt.txt")
 MAX_TICKER_HISTORY_CYCLES: int = int(float(os.environ.get("MAX_TICKER_HISTORY_CYCLES", 500)))
 
 # ---------------------------------------------------------------------------

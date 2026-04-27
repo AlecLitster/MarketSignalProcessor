@@ -2,7 +2,7 @@
 config/indicators_tradingview.py
 ---------------------------------
 Registry of every TradingView indicator processed by this system,
-plus all shared scoring functions used by both TV and BarChart adapters.
+plus all shared scoring functions used by signal source adapters.
 
 To add a new indicator:
   1. Find the field name from tradingview_ta's analysis.indicators dict.
@@ -139,7 +139,7 @@ def no_signal(value: Any, indicators: dict, params: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Dispatch table — shared with indicators_barchart.py
+# Dispatch table
 # ---------------------------------------------------------------------------
 
 SCORE_FUNCTIONS: dict[str, Callable] = {

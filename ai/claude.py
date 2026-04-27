@@ -141,39 +141,6 @@ class ClaudeInterpreter(AIInterpreter):
                         lines.append(f"    {iv.key:<30}: {iv.value:.2f}")
             lines.append("")
 
-        # BarChart signal
-        if result.barchart:
-            bc = result.barchart
-            lines += [
-                "## Signal #2 — BarChart",
-                f"  Signal : {bc.signal}  |  Score: {bc.score:+.4f}",
-                "  Timeframes:",
-            ]
-            for tf, sig in bc.timeframe_signals.items():
-                lines.append(f"    {tf:<10}: {sig}")
-            lines += ["  Key Indicators:"]
-            for cat, ivs in bc.indicators.items():
-                if cat == "price_volume":
-                    continue
-                for iv in ivs:
-                    if iv.signal not in ("N/A",) and iv.value is not None:
-                        lines.append(f"    {iv.key:<22}: {iv.value:.4f}  [{iv.signal}]")
-            lines.append("")
-
-        # TrendSpotter
-        if result.trendspotter:
-            ts = result.trendspotter
-            lines += [
-                "## Signal #3 — BarChart TrendSpotter",
-                f"  Signal   : {ts.signal}",
-                f"  Strength : {ts.strength}",
-                f"  Change   : {ts.change}",
-                f"  Score    : {ts.score:+.4f}",
-            ]
-            if ts.signal_date:
-                lines.append(f"  Since    : {ts.signal_date} ({ts.days_in_signal or '?'} trading days)")
-            lines.append("")
-
         # Swing event context
         if result.swing_event:
             sw = result.swing_event
@@ -192,18 +159,17 @@ class ClaudeInterpreter(AIInterpreter):
         if recent_history:
             lines += [
                 f"## Signal History (last {len(recent_history)} cycles)",
-                f"  {'Timestamp':<22} {'Consensus':<8} {'Score':>8}  {'TV':<6} {'BC':<6} {'TS':<6}",
-                f"  {'-'*65}",
+                f"  {'Timestamp':<22} {'Consensus':<8} {'Score':>8}  {'TV':<6} {'YF':<6}",
+                f"  {'-'*60}",
             ]
             for entry in recent_history:
-                ts_str  = entry.get("timestamp", "")[:19]
-                cons    = entry.get("consensus_signal", "N/A")
-                score   = entry.get("consensus_score", 0.0)
-                tv_sig  = (entry.get("tradingview") or {}).get("signal", "N/A")
-                bc_sig  = (entry.get("barchart")    or {}).get("signal", "N/A")
-                ts_sig  = (entry.get("trendspotter") or {}).get("signal", "N/A")
+                ts_str = entry.get("timestamp", "")[:19]
+                cons   = entry.get("consensus_signal", "N/A")
+                score  = entry.get("consensus_score", 0.0)
+                tv_sig = (entry.get("tradingview") or {}).get("signal", "N/A")
+                yf_sig = (entry.get("yfinance")    or {}).get("signal", "N/A")
                 lines.append(
-                    f"  {ts_str:<22} {cons:<8} {score:>+8.4f}  {tv_sig:<6} {bc_sig:<6} {ts_sig:<6}"
+                    f"  {ts_str:<22} {cons:<8} {score:>+8.4f}  {tv_sig:<6} {yf_sig:<6}"
                 )
             lines.append("")
 

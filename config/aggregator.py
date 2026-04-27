@@ -5,8 +5,7 @@ Computes the consensus signal across all active sources for each ticker.
 
 The consensus is a weighted average of:
   - TradingView score  (weight: CONSENSUS_WEIGHTS["tradingview"])
-  - BarChart score     (weight: CONSENSUS_WEIGHTS["barchart"])
-  - TrendSpotter score (weight: CONSENSUS_WEIGHTS["trendspotter"])
+  - YFinance score     (weight: CONSENSUS_WEIGHTS["yfinance"])
 
 If a source is unavailable (None), its weight is redistributed
 proportionally across the remaining active sources so the consensus
@@ -23,7 +22,7 @@ from config.settings import (
     BUY_THRESHOLD,
     SELL_THRESHOLD,
 )
-from core.models import CycleResult, SourceSignal, TrendSpotterSignal
+from core.models import CycleResult
 
 log = logging.getLogger(__name__)
 
@@ -48,10 +47,6 @@ def compute_consensus(result: CycleResult) -> tuple[str, float]:
 
     if result.tradingview is not None:
         available["tradingview"] = result.tradingview.score
-    if result.barchart is not None:
-        available["barchart"] = result.barchart.score
-    if result.trendspotter is not None:
-        available["trendspotter"] = result.trendspotter.score
 
     if not available:
         log.warning("%s: no source data — consensus defaulting to HOLD", result.ticker)
@@ -81,12 +76,11 @@ def aggregate(results: list[CycleResult]) -> list[CycleResult]:
         result.consensus_signal = signal
         result.consensus_score  = score
         log.debug(
-            "%s consensus: %s (score=%+.4f)  TV=%s  BC=%s  TS=%s",
+            "%s consensus: %s (score=%+.4f)  TV=%s  YF=%s",
             result.ticker,
             signal,
             score,
-            result.tradingview.signal  if result.tradingview  else "N/A",
-            result.barchart.signal     if result.barchart     else "N/A",
-            result.trendspotter.signal if result.trendspotter else "N/A",
+            result.tradingview.signal if result.tradingview else "N/A",
+            result.yfinance.signal    if result.yfinance    else "N/A",
         )
     return results
